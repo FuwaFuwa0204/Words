@@ -23,6 +23,7 @@ import android.view.ViewGroup
 import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.Button
 import androidx.annotation.RequiresApi
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -63,14 +64,20 @@ class LetterAdapter :
     override fun onBindViewHolder(holder: LetterViewHolder, position: Int) {
         val item = list.get(position)
         holder.button.text = item.toString()
+
+        val action = LetterListFragmentDirections.actionLetterListFragmentToWordListFragment2(letter = holder.button.text.toString())
+        holder.view.findNavController().navigate(action)
+    /*
         holder.button.setOnClickListener {
             //context 참조 가져오기
             val context = holder.itemView.context
             //표시하려는 활동의 이름은 DetailActivity
-            val intent = Intent(context,DetailActivity::class.java)
-            intent.putExtra(DetailActivity.LETTER, holder.button.text.toString())
+            val intent = Intent(context,WordListFragment::class.java)
+            intent.putExtra(WordListFragment.LETTER, holder.button.text.toString())
             context.startActivity(intent)
         }
+
+         */
     }
 
     // Setup custom accessibility delegate to set the text read with
